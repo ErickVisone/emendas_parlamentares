@@ -20,7 +20,10 @@ wheels/
 .env
 
 #Others
-code/load
+code/extract/extract_amendments.py
+code/load/amendments
 code/transform
 data/raw/amendments
 data/raw/test
+notebooks/discarted
+notebooks/test/amendments.ipynb
