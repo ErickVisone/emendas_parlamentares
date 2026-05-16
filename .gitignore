@@ -20,5 +20,7 @@ wheels/
 .env
 
 #Others
-code/*
-data/*
+code/load
+code/transform
+data/raw/amendments
+data/raw/test
