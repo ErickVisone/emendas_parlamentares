@@ -12,23 +12,23 @@ load_dotenv()
 # CONFIG
 INITIAL_LEGISLATURE = 54
 FINAL_LEGISLATURE = 57
-TABLE_NAME = "legislatures"
-BASE_URL = ("https://dadosabertos.camara.leg.br/api/v2/deputados")
+TABLE_NAME = "legislature_details"
+BASE_URL = ("https://dadosabertos.camara.leg.br/api/v2/legislaturas")
 
 
 #  FUNCTIONS
 
 # GET LEGISLATURES
-def get_legislatures(legislature_id):
+def get_legislatures_details(legislature_id, page=1):
 
     all_dfs = []
 
     page = 1
 
     while True:
-        print(f"Collecting legislature {legislature_id} | Page {page}")
+        print(f"Collecting details for legislature {legislature_id} | Page {page}")
 
-        url = (f"{BASE_URL}?idLegislatura={legislature_id}&ordem=ASC&ordenarPor=nome&pagina={page}")
+        url = (f"{BASE_URL}?id={legislature_id}&&pagina={page}&ordem=DESC&ordenarPor=id")
 
         try:
             response = requests.get(url,timeout=30)
@@ -42,7 +42,7 @@ def get_legislatures(legislature_id):
 
             # Stop pagination
             if not page_data:
-                print(f"No more pages for legislature {legislature_id}")
+                print(f"No more details for legislature {legislature_id}")
                 break
 
             # Convert page data into DataFrame
@@ -56,7 +56,7 @@ def get_legislatures(legislature_id):
 
         except Exception as e:
 
-            print(f"Error collecting legislature {legislature_id}: {e}")
+            print(f"Error collecting {legislature_id} details: {e}")
             break
 
     # Return empty DataFrame if no data
@@ -102,16 +102,16 @@ def main():
         print("========================")
 
         # Extract
-        data = get_legislatures(legislature)
+        data = get_legislatures_details(legislature)
 
         # Append only if not empty
         if not data.empty:
 
             dfs.append(data)
-            print(f"Legislature {legislature} added successfully")
+            print(f"Legislature details for {legislature} added successfully")
 
         else:
-            print(f"No data found for legislature {legislature}")
+            print(f"No details for legislature {legislature}")
 
     # Concatenate all legislatures
     if dfs:
