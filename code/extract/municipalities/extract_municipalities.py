@@ -17,10 +17,7 @@ try:
 
     df = pd.json_normalize(data)
 
-    df.to_parquet(
-        f"{output_path}/municipalities.parquet",
-        index=False
-    )
+    df.to_parquet(f"{output_path}/municipalities.parquet",index=False)
 
     print("Municipalities saved successfully")
 
