@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+
+#dbt files
+/logs/
+/emendas_warehouse/logs/
+/emendas_warehouse/target/
+/emendas_warehouse/dbt_packages/
+
+#Environment Settings
+.env
+
+#Others
+code/*
+data/*
